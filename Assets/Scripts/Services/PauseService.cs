@@ -26,9 +26,20 @@ namespace Arkanoid.Services
 
         private void Start()
         {
-            _pauseMenuPanel.SetActive(false);
-            _continueButton.onClick.AddListener(ContinueGame);
-            _exitButton.onClick.AddListener(ExitGame);
+            if (_pauseMenuPanel != null)
+            {
+                _pauseMenuPanel.SetActive(false);
+            }
+
+            if (_continueButton != null)
+            {
+                _continueButton.onClick.AddListener(ContinueGame);
+            }
+
+            if (_exitButton != null)
+            {
+                _exitButton.onClick.AddListener(ExitGame);
+            }
         }
 
         private void Update()
@@ -57,7 +68,10 @@ namespace Arkanoid.Services
         {
             _isPaused = !_isPaused;
             Time.timeScale = _isPaused ? 0 : 1;
-            _pauseMenuPanel.SetActive(_isPaused);
+            if (_pauseMenuPanel != null)
+            {
+                _pauseMenuPanel.SetActive(_isPaused);
+            }
         }
 
         #endregion

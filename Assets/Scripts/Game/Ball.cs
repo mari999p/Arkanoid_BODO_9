@@ -3,81 +3,95 @@ using UnityEngine;
 
 namespace Arkanoid.Game
 {
-        public class Ball : MonoBehaviour
+    public class Ball : MonoBehaviour
+    {
+        #region Variables
+
+        [SerializeField] private Rigidbody2D _rb;
+        [SerializeField] private Vector2 _startDirection;
+        [SerializeField] private float _speed = 30;
+
+        private bool _isStarted;
+        private Platform _platform;
+
+        #endregion
+
+        #region Unity lifecycle
+
+        private void Start()
         {
-            #region Variables
+            _platform = FindObjectOfType<Platform>();
+            GameService.Instance.OnLifeLost += HandleLifeLost;
+        }
 
-            [SerializeField] private Rigidbody2D _rb;
-            [SerializeField] private Vector2 _startDirection;
-            [SerializeField] private float _speed = 10;
-
-            private bool _isStarted;
-            private Platform _platform;
-
-            #endregion
-
-            #region Unity lifecycle
-
-            private void Start()
+        private void Update()
+        {
+            if (_isStarted)
             {
-                _platform = FindObjectOfType<Platform>();
-                GameService.Instance.OnLifeLost += HandleLifeLost;
+                return;
             }
 
-            private void Update()
+            MoveWithPlatform();
+            if (Input.GetMouseButton(0))
             {
-                if (_isStarted)
-                {
-                    return;
-                }
-
-                MoveWithPlatform();
-                if (Input.GetMouseButton(0))
-                {
-                    StartFlying();
-                }
+                StartFlying();
             }
+        }
 
-            private void OnDrawGizmos()
+        private void OnDestroy()
+        {
+            GameService.Instance.OnLifeLost -= HandleLifeLost;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (!_isStarted)
             {
-                if (!_isStarted)
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawLine(transform.position, transform.position + (Vector3)_startDirection);
-                }
-                else
-                {
-                    Gizmos.color = Color.blue;
-                    Gizmos.DrawLine(transform.position, transform.position + (Vector3)_rb.velocity);
-                }
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(transform.position, transform.position + (Vector3)_startDirection);
             }
-
-            #endregion
-
-            #region Private methods
-
-            private void HandleLifeLost(int i)
+            else
             {
-                _isStarted = false;
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(transform.position, transform.position + (Vector3)(_rb?.velocity ?? Vector2.zero));
+            }
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void HandleLifeLost(int i)
+        {
+            _isStarted = false;
+            if (_rb != null)
+            {
                 _rb.velocity = Vector2.zero;
-                MoveWithPlatform();
-                UIService.Instance.RemoveHeart();
             }
 
-            private void MoveWithPlatform()
+            MoveWithPlatform();
+            UIService.Instance.RemoveHeart();
+        }
+
+        private void MoveWithPlatform()
+        {
+            if (_platform != null)
             {
                 Vector3 currentPosition = transform.position;
                 currentPosition.x = _platform.transform.position.x;
                 transform.position = currentPosition;
             }
-
-            private void StartFlying()
-            {
-                _isStarted = true;
-                _rb.velocity = _startDirection.normalized * _speed;
-                 _rb.velocity = _startDirection;
-            }
-
-            #endregion
         }
+
+        private void StartFlying()
+        {
+            _isStarted = true;
+            if (_rb != null)
+            {
+                _rb.velocity = _startDirection.normalized * _speed;
+            }
+        }
+
+        #endregion
     }
+}

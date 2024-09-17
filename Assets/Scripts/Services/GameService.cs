@@ -1,7 +1,6 @@
 using System;
 using Arkanoid.Utility;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
 
 namespace Arkanoid.Services
 {
@@ -11,19 +10,23 @@ namespace Arkanoid.Services
 
         [SerializeField] private int _score;
         [SerializeField] private int _lives = 3;
-        
+
+        #endregion
+
+        #region Events
+
+        public event Action<int> OnGameOver;
+        public event Action<int> OnLifeLost;
+
+        public event Action<int> OnScoreChange;
 
         #endregion
 
         #region Properties
 
-        public event Action<int> OnScoreChange; 
-        public event Action<int> OnLifeLost; 
-        public event Action<int> OnGameOver;
-        
+        public int Lives => _lives;
 
         public int Score => _score;
-        public int Lives => _lives;
 
         #endregion
 
@@ -38,6 +41,10 @@ namespace Arkanoid.Services
         {
             LevelService.Instance.OnAllBlocksDestroyed -= AllBlocksDestroyedCallback;
         }
+
+        #endregion
+
+        #region Public methods
 
         public void AddScore(int value)
         {
@@ -61,7 +68,6 @@ namespace Arkanoid.Services
 
         private void AllBlocksDestroyedCallback()
         {
-            
             SceneLoaderService.LoadNextLevelTest("Level2");
         }
 

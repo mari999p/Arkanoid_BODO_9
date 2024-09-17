@@ -16,8 +16,6 @@ namespace Arkanoid.Game
             Block.OnCreated -= CreatedBlock;
         }
 
-        private void OnCollisionEnter2D(Collision2D other) { }
-
         #endregion
 
         #region Private methods

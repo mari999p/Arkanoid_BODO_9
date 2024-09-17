@@ -14,8 +14,6 @@ namespace Arkanoid.Services
         [SerializeField] private GameObject[] _hearts;
         [SerializeField] private GameObject _ball;
         [SerializeField] private GameObject _platform;
-        [SerializeField] private GameObject _continueButton;
-        
 
         #endregion
 
@@ -39,7 +37,7 @@ namespace Arkanoid.Services
 
         public void RemoveHeart()
         {
-            if (GameService.Instance.Lives < 3)
+            if (GameService.Instance.Lives < 3 && _hearts[GameService.Instance.Lives] != null)
             {
                 _hearts[GameService.Instance.Lives].SetActive(false);
             }
@@ -51,20 +49,36 @@ namespace Arkanoid.Services
 
         private void ShowGameOver(int i)
         {
-            _gameOverPanel.SetActive(true);
-            _gameOverPanel.GetComponentInChildren<TMP_Text>().text =
-                $"Game Over!\n Score: {GameService.Instance.Score}";
-            Time.timeScale = 0;
-            _ball.SetActive(false);
-            _platform.SetActive(false);
+            if (_gameOverPanel != null)
+            {
+                _gameOverPanel.SetActive(true);
+                TMP_Text gameOverText = _gameOverPanel.GetComponentInChildren<TMP_Text>();
+                if (gameOverText != null)
+                {
+                    gameOverText.text = $"Game Over!\n Score: {GameService.Instance.Score}";
+                }
+
+                Time.timeScale = 0;
+                if (_ball != null)
+                {
+                    _ball.SetActive(false);
+                }
+
+                if (_platform != null)
+                {
+                    _platform.SetActive(false);
+                }
+            }
         }
 
         private void UpdateScoreLabel(int score)
         {
-            _scoreLabel.text = $"Score: {score}";
+            if (_scoreLabel != null)
+            {
+                _scoreLabel.text = $"Score: {score}";
+            }
         }
-        
+
         #endregion
     }
-    
 }
