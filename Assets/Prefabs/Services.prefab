@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156cd41405924a21a7acbef089eb51e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelSceneNames:
+  - Level1
+  - Level2
 --- !u!1 &3485284041350046273
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +91,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd1a4a84d2d49d68effda4f764f99d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4870772803628148400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9215363243883599580}
+  - component: {fileID: 1402777481761085527}
+  m_Layer: 0
+  m_Name: PickUpService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9215363243883599580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4870772803628148400}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6356677102817679001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1402777481761085527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4870772803628148400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb02ead46474a3d9eec95bf9d1731f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pickUpSpawnProbability: 50
+  _pickUpPrefab: {fileID: 7743609001385235375, guid: 0d4365a4e47cea04aa8d19d28a414a63, type: 3}
 --- !u!1 &7539090910252172802
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +170,7 @@ Transform:
   - {fileID: 68299278649719718}
   - {fileID: 5852527050349646636}
   - {fileID: 7408966248475884836}
+  - {fileID: 9215363243883599580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7550196831806292501
@@ -167,6 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 743d75cf9d304a22ad790b439cdae356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAutoPlay: 0
+  _maxLives: 3
   _score: 0
   _lives: 3
 --- !u!1 &8567886121576185611
@@ -213,6 +265,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b12bea0827dc4ba6a8a2615edc3af825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pauseMenuPanel: {fileID: 0}
-  _continueButton: {fileID: 0}
-  _exitButton: {fileID: 0}
