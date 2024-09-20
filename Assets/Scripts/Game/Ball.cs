@@ -1,3 +1,4 @@
+using System;
 using Arkanoid.Services;
 using UnityEngine;
 
@@ -9,10 +10,18 @@ namespace Arkanoid.Game
 
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private Vector2 _startDirection;
-        [SerializeField] private float _speed = 30;
+        [SerializeField] private float _speed = 10;
+        [SerializeField] private float _yOffsetFromPlatform = 1;
 
         private bool _isStarted;
         private Platform _platform;
+
+        #endregion
+
+        #region Events
+
+        public static event Action<Ball> OnCreated;
+        public static event Action<Ball> OnDestroyed;
 
         #endregion
 
@@ -21,7 +30,13 @@ namespace Arkanoid.Game
         private void Start()
         {
             _platform = FindObjectOfType<Platform>();
-            GameService.Instance.OnLifeLost += HandleLifeLost;
+
+            OnCreated?.Invoke(this);
+
+            if (GameService.Instance.IsAutoPlay)
+            {
+                StartFlying();
+            }
         }
 
         private void Update()
@@ -32,7 +47,8 @@ namespace Arkanoid.Game
             }
 
             MoveWithPlatform();
-            if (Input.GetMouseButton(0))
+
+            if (Input.GetMouseButtonDown(0))
             {
                 StartFlying();
             }
@@ -40,7 +56,7 @@ namespace Arkanoid.Game
 
         private void OnDestroy()
         {
-            GameService.Instance.OnLifeLost -= HandleLifeLost;
+            OnDestroyed?.Invoke(this);
         }
 
         private void OnDrawGizmos()
@@ -49,47 +65,41 @@ namespace Arkanoid.Game
             {
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(transform.position, transform.position + (Vector3)_startDirection);
+                // Debug.Log($"Magnitude: '{_startDirection.magnitude}'");
             }
             else
             {
-                Gizmos.color = Color.blue;
-                Gizmos.DrawLine(transform.position, transform.position + (Vector3)(_rb?.velocity ?? Vector2.zero));
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, transform.position + (Vector3)_rb.velocity);
             }
+        }
+
+        #endregion
+
+        #region Public methods
+
+        public void ResetBall()
+        {
+            _isStarted = false;
+            _rb.velocity = Vector2.zero;
         }
 
         #endregion
 
         #region Private methods
 
-        private void HandleLifeLost(int i)
-        {
-            _isStarted = false;
-            if (_rb != null)
-            {
-                _rb.velocity = Vector2.zero;
-            }
-
-            MoveWithPlatform();
-            UIService.Instance.RemoveHeart();
-        }
-
         private void MoveWithPlatform()
         {
-            if (_platform != null)
-            {
-                Vector3 currentPosition = transform.position;
-                currentPosition.x = _platform.transform.position.x;
-                transform.position = currentPosition;
-            }
+            Vector3 currentPosition = transform.position;
+            currentPosition.x = _platform.transform.position.x;
+            currentPosition.y = _platform.transform.position.y + _yOffsetFromPlatform;
+            transform.position = currentPosition;
         }
 
         private void StartFlying()
         {
             _isStarted = true;
-            if (_rb != null)
-            {
-                _rb.velocity = _startDirection.normalized * _speed;
-            }
+            _rb.velocity = _startDirection.normalized * _speed;
         }
 
         #endregion

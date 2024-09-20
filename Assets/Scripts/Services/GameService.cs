@@ -8,29 +8,39 @@ namespace Arkanoid.Services
     {
         #region Variables
 
+        [Header("Auto Play")]
+        [SerializeField] private bool _isAutoPlay;
+
+        [Header("Settings")]
+        [SerializeField] private int _maxLives = 3;
+
+        [Header("Stats")]
         [SerializeField] private int _score;
-        [SerializeField] private int _lives = 3;
+        [SerializeField] private int _lives;
 
         #endregion
 
         #region Events
 
-        public event Action<int> OnGameOver;
-        public event Action<int> OnLifeLost;
-
-        public event Action<int> OnScoreChange;
+        public event Action<int> OnScoreChanged;
 
         #endregion
 
         #region Properties
 
-        public int Lives => _lives;
-
+        public bool IsAutoPlay => _isAutoPlay;
         public int Score => _score;
 
         #endregion
 
         #region Unity lifecycle
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _lives = _maxLives;
+        }
 
         private void Start()
         {
@@ -49,17 +59,20 @@ namespace Arkanoid.Services
         public void AddScore(int value)
         {
             _score += value;
-            OnScoreChange?.Invoke(_score);
+            OnScoreChanged?.Invoke(_score);
         }
 
-        public void LoseLife()
+        public void RemoveLife()
         {
-            _lives--;
-            OnLifeLost?.Invoke(_lives);
-            if (_lives <= 0)
+            if (_lives > 0)
             {
-                OnGameOver?.Invoke(0);
+                _lives--;
+
+                LevelService.Instance.Ball.ResetBall();
+                return;
             }
+
+            Debug.LogError($"GAME OVER!");
         }
 
         #endregion
@@ -68,7 +81,14 @@ namespace Arkanoid.Services
 
         private void AllBlocksDestroyedCallback()
         {
-            SceneLoaderService.LoadNextLevelTest("Level2");
+            if (SceneLoaderService.Instance.HasNextLevel())
+            {
+                SceneLoaderService.Instance.LoadNextLevel();
+            }
+            else
+            {
+                Debug.LogError($"GAME WIN!");
+            }
         }
 
         #endregion

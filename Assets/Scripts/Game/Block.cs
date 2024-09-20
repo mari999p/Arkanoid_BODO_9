@@ -12,7 +12,7 @@ namespace Arkanoid.Game
         [SerializeField] private Sprite _crackedBlock;
         [SerializeField] private Sprite _heavilyCrackedBlock;
         [SerializeField] private int _hitPoints = 3;
-        [SerializeField] private int _score;
+        [SerializeField] private int _score =1 ;
 
         #endregion
 
@@ -32,7 +32,6 @@ namespace Arkanoid.Game
 
         private void OnDestroy()
         {
-            GameService.Instance.AddScore(_score);
             OnDestroyed?.Invoke(this);
         }
 
@@ -48,6 +47,8 @@ namespace Arkanoid.Game
             {
                 Destroy(gameObject);
             }
+
+            DestroyBlock();
         }
 
         #endregion
@@ -66,6 +67,13 @@ namespace Arkanoid.Game
                 _spriteRenderer.sprite = _heavilyCrackedBlock;
             }
         }
+        private void DestroyBlock()
+        {
+            GameService.Instance.AddScore(_score);
+            PickUpService.Instance.SpawnPickUp(transform.position);
+            Destroy(gameObject);
+        }
+
 
         #endregion
     }

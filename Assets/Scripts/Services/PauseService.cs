@@ -1,46 +1,24 @@
+using System;
 using Arkanoid.Utility;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Arkanoid.Services
 {
     public class PauseService : SingletonMonoBehaviour<PauseService>
     {
-        #region Variables
+        #region Events
 
-        [SerializeField] private GameObject _pauseMenuPanel;
-        [SerializeField] private Button _continueButton;
-        [SerializeField] private Button _exitButton;
-
-        private bool _isPaused;
+        public event Action<bool> OnChanged;
 
         #endregion
 
         #region Properties
 
-        public bool IsPaused => _isPaused;
+        public bool IsPaused { get; private set; }
 
         #endregion
 
         #region Unity lifecycle
-
-        private void Start()
-        {
-            if (_pauseMenuPanel != null)
-            {
-                _pauseMenuPanel.SetActive(false);
-            }
-
-            if (_continueButton != null)
-            {
-                _continueButton.onClick.AddListener(ContinueGame);
-            }
-
-            if (_exitButton != null)
-            {
-                _exitButton.onClick.AddListener(ExitGame);
-            }
-        }
 
         private void Update()
         {
@@ -52,26 +30,13 @@ namespace Arkanoid.Services
 
         #endregion
 
-        #region Private methods
+        #region Public methods
 
-        private void ContinueGame()
+        public void TogglePause()
         {
-            TogglePause();
-        }
-
-        private void ExitGame()
-        {
-            Application.Quit();
-        }
-
-        private void TogglePause()
-        {
-            _isPaused = !_isPaused;
-            Time.timeScale = _isPaused ? 0 : 1;
-            if (_pauseMenuPanel != null)
-            {
-                _pauseMenuPanel.SetActive(_isPaused);
-            }
+            IsPaused = !IsPaused;
+            Time.timeScale = IsPaused ? 0 : 1;
+            OnChanged?.Invoke(IsPaused);
         }
 
         #endregion
