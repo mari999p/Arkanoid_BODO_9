@@ -1,4 +1,5 @@
 using System;
+using Arkanoid.UI;
 using Arkanoid.Utility;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace Arkanoid.Services
         #region Properties
 
         public bool IsAutoPlay => _isAutoPlay;
+        public int Lives => _lives;
         public int Score => _score;
 
         #endregion
@@ -56,6 +58,15 @@ namespace Arkanoid.Services
 
         #region Public methods
 
+        public void AddLife(int value)
+        {
+            _lives += value;
+            if (_lives > _maxLives)
+            {
+                _lives = _maxLives;
+            }
+        }
+
         public void AddScore(int value)
         {
             _score += value;
@@ -67,12 +78,14 @@ namespace Arkanoid.Services
             if (_lives > 0)
             {
                 _lives--;
+                GameOverScreen.Instance.RemoveHeart();
 
                 LevelService.Instance.Ball.ResetBall();
                 return;
             }
 
-            Debug.LogError($"GAME OVER!");
+            Debug.LogError("GAME OVER!");
+            GameOverScreen.Instance.ShowGameOver();
         }
 
         #endregion
@@ -87,7 +100,7 @@ namespace Arkanoid.Services
             }
             else
             {
-                Debug.LogError($"GAME WIN!");
+                Debug.LogError("GAME WIN!");
             }
         }
 

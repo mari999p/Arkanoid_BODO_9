@@ -1,6 +1,8 @@
 using System;
+using Arkanoid.Game.PickUps;
 using Arkanoid.Services;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Arkanoid.Game
 {
@@ -8,11 +10,20 @@ namespace Arkanoid.Game
     {
         #region Variables
 
+        [Header("Settings Sprite")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Sprite _crackedBlock;
         [SerializeField] private Sprite _heavilyCrackedBlock;
+
+        [Header("Block Settings")]
         [SerializeField] private int _hitPoints = 3;
-        [SerializeField] private int _score =1 ;
+        [SerializeField] private int _score = 1;
+        [SerializeField] private bool _isInvisible;
+
+        [Header("Settings PickUp")]
+        [Range(0, 100)]
+        [SerializeField] private int _pickUpSpawnProbability;
+        [SerializeField] private PickUp[] _possiblePickUps;
 
         #endregion
 
@@ -27,6 +38,7 @@ namespace Arkanoid.Game
 
         private void Start()
         {
+            _spriteRenderer.enabled = !_isInvisible;
             OnCreated?.Invoke(this);
         }
 
@@ -46,14 +58,41 @@ namespace Arkanoid.Game
             if (_hitPoints <= 0)
             {
                 Destroy(gameObject);
+                DestroyBlock();
             }
 
-            DestroyBlock();
+            if (!_isInvisible)
+            {
+                return;
+            }
+
+            _spriteRenderer.enabled = true;
         }
 
         #endregion
 
         #region Private methods
+
+        private void DestroyBlock()
+        {
+            GameService.Instance.AddScore(_score);
+            SpawnPickUp(transform.position);
+            Destroy(gameObject);
+        }
+
+        private void SpawnPickUp(Vector3 position)
+        {
+            int random = Random.Range(0, 101);
+            if (random <= _pickUpSpawnProbability)
+            {
+                int mainPickUpSpawned = Random.Range(0, 101);
+                if (mainPickUpSpawned <= _pickUpSpawnProbability)
+                {
+                    int pickUpIndex = Random.Range(0, _possiblePickUps.Length);
+                    Instantiate(_possiblePickUps[pickUpIndex], position, Quaternion.identity);
+                }
+            }
+        }
 
         private void UpdateBlockSprite()
         {
@@ -67,13 +106,6 @@ namespace Arkanoid.Game
                 _spriteRenderer.sprite = _heavilyCrackedBlock;
             }
         }
-        private void DestroyBlock()
-        {
-            GameService.Instance.AddScore(_score);
-            PickUpService.Instance.SpawnPickUp(transform.position);
-            Destroy(gameObject);
-        }
-
 
         #endregion
     }

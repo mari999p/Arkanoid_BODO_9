@@ -1,6 +1,7 @@
 using Arkanoid.Game.PickUps;
 using Arkanoid.Utility;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Arkanoid.Services
 {
@@ -10,28 +11,21 @@ namespace Arkanoid.Services
 
         [Range(0, 100)]
         [SerializeField] private int _pickUpSpawnProbability;
-        [SerializeField] private PickUp _pickUpPrefab;
 
         #endregion
 
         #region Public methods
 
-        public void SpawnPickUp(Vector3 position)
+        public void SpawnPickUp(Vector3 position, PickUp[] possiblePickUps)
         {
-            if (_pickUpPrefab == null)
-            {
-                return;
-            }
-
             int random = Random.Range(0, 101);
-            if (random > _pickUpSpawnProbability)
+            if (random <= _pickUpSpawnProbability && possiblePickUps.Length > 0)
             {
-                Instantiate(_pickUpPrefab, position, Quaternion.identity);
+                int pickUpIndex = Random.Range(0, possiblePickUps.Length);
+                Instantiate(possiblePickUps[pickUpIndex], position, Quaternion.identity);
             }
         }
 
         #endregion
     }
-
-   
 }

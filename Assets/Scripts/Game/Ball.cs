@@ -65,7 +65,6 @@ namespace Arkanoid.Game
             {
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(transform.position, transform.position + (Vector3)_startDirection);
-                // Debug.Log($"Magnitude: '{_startDirection.magnitude}'");
             }
             else
             {
@@ -77,6 +76,12 @@ namespace Arkanoid.Game
         #endregion
 
         #region Public methods
+
+        public void ChangeSpeed(float speedChange)
+        {
+            _speed += speedChange;
+            _rb.velocity = _startDirection.normalized * _speed;
+        }
 
         public void ResetBall()
         {

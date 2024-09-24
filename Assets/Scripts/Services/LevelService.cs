@@ -78,4 +78,4 @@ namespace Arkanoid.Services
 
         #endregion
     }
-} 
+}
