@@ -136,7 +136,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pickUpSpawnProbability: 50
-  _pickUpPrefab: {fileID: 7743609001385235375, guid: 0d4365a4e47cea04aa8d19d28a414a63, type: 3}
+  _pickUpPrefab:
+  - {fileID: -9175491997093805154, guid: b94db6ec3e86bec459ce45708d7f3602, type: 3}
+  - {fileID: 6373404916828651328, guid: 0d4365a4e47cea04aa8d19d28a414a63, type: 3}
+  - {fileID: 8310307745732256268, guid: 7cffb738f0908a74f99ee97540c14815, type: 3}
+  - {fileID: -8997042829877804104, guid: 7bfebbf684803f14794f05ab02f0a411, type: 3}
 --- !u!1 &7539090910252172802
 GameObject:
   m_ObjectHideFlags: 0

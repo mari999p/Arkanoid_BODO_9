@@ -135,6 +135,10 @@ MonoBehaviour:
   _heavilyCrackedBlock: {fileID: 21300000, guid: a443529307089a4498146994c75de133, type: 3}
   _hitPoints: 3
   _score: 10
+  _pickUpSpawnProbability: 50
+  _possiblePickUps:
+  - {fileID: 8310307745732256268, guid: 7cffb738f0908a74f99ee97540c14815, type: 3}
+  _isInvisible: 0
 --- !u!61 &5279690193515224850
 BoxCollider2D:
   m_ObjectHideFlags: 0
