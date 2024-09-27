@@ -1,23 +1,19 @@
 using Arkanoid.Services;
-using UnityEngine;
 
 namespace Arkanoid.Game.PickUps
 {
-    public class ChangeLifePickUp : PickUp
+    public class CatchBallPickUp : PickUp
     {
-        #region Variables
-
-        [SerializeField] private int _lifeChange;
-
-        #endregion
-
         #region Protected methods
 
         protected override void PerformActions()
         {
             base.PerformActions();
-
-            GameService.Instance.ChangeLife(_lifeChange);
+            Ball ball = LevelService.Instance.Ball;
+            if (ball != null)
+            {
+                ball.ResetBall();
+            }
         }
 
         #endregion
