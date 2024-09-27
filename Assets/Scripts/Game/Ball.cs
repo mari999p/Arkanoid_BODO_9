@@ -12,6 +12,9 @@ namespace Arkanoid.Game
         [SerializeField] private Vector2 _startDirection;
         [SerializeField] private float _speed = 10;
         [SerializeField] private float _yOffsetFromPlatform = 1;
+        
+        [Header("Audio")]
+        [SerializeField] private AudioClip _hitAudioClip;
 
         private bool _isStarted;
         private Platform _platform;
@@ -72,6 +75,10 @@ namespace Arkanoid.Game
                 Gizmos.DrawLine(transform.position, transform.position + (Vector3)_rb.velocity);
             }
         }
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            AudioService.Instance.PlaySfx(_hitAudioClip);
+        }
 
         #endregion
 
@@ -82,7 +89,6 @@ namespace Arkanoid.Game
             _speed += speedChange;
             _rb.velocity = _startDirection.normalized * _speed;
         }
-
         public void ResetBall()
         {
             _isStarted = false;

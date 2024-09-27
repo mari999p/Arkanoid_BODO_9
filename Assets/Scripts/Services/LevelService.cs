@@ -7,6 +7,7 @@ namespace Arkanoid.Services
 {
     public class LevelService : SingletonMonoBehaviour<LevelService>
     {
+
         #region Variables
 
         private readonly List<Block> _blocks = new();

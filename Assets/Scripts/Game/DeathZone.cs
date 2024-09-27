@@ -22,7 +22,8 @@ namespace Arkanoid.Game
 
             if (other.gameObject.CompareTag(Tag.Ball))
             {
-                GameService.Instance.RemoveLife();
+                GameService.Instance.ChangeLife(-1);
+                GameService.Instance.ResetBall();
             }
             else
             {

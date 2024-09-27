@@ -1,8 +1,6 @@
 using System;
-using Arkanoid.Game.PickUps;
 using Arkanoid.Services;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Arkanoid.Game
 {
@@ -20,10 +18,11 @@ namespace Arkanoid.Game
         [SerializeField] private int _score = 1;
         [SerializeField] private bool _isInvisible;
 
-        [Header("Settings PickUp")]
-        [Range(0, 100)]
-        [SerializeField] private int _pickUpSpawnProbability;
-        [SerializeField] private PickUp[] _possiblePickUps;
+        [SerializeField] private bool _isExplosive;
+        [SerializeField] private float _explosiveRadius = 1f;
+        [SerializeField] private LayerMask _explosiveLayerMask;
+        [SerializeField] private GameObject _explosionVfxPrefab;
+        [SerializeField] private AudioClip _explosionAudioClip;
 
         #endregion
 
@@ -69,6 +68,24 @@ namespace Arkanoid.Game
             _spriteRenderer.enabled = true;
         }
 
+        private void OnDrawGizmos()
+        {
+            if (_isExplosive)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(transform.position, _explosiveRadius);
+            }
+        }
+
+        #endregion
+
+        #region Public methods
+
+        public void ForceDestroy()
+        {
+            DestroyBlock();
+        }
+
         #endregion
 
         #region Private methods
@@ -76,20 +93,31 @@ namespace Arkanoid.Game
         private void DestroyBlock()
         {
             GameService.Instance.AddScore(_score);
-            SpawnPickUp(transform.position);
+            PickUpService.Instance.SpawnPickUp(transform.position);
             Destroy(gameObject);
+            Explode();
         }
 
-        private void SpawnPickUp(Vector3 position)
+        private void Explode()
         {
-            int random = Random.Range(0, 101);
-            if (random <= _pickUpSpawnProbability)
+            if (!_isExplosive)
             {
-                int mainPickUpSpawned = Random.Range(0, 101);
-                if (mainPickUpSpawned <= _pickUpSpawnProbability)
+                return;
+            }
+
+            AudioService.Instance.PlaySfx(_explosionAudioClip);
+            
+            if (_explosionVfxPrefab != null)
+            {
+                Instantiate(_explosionVfxPrefab, transform.position, Quaternion.identity);
+            }
+            
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _explosiveRadius, _explosiveLayerMask);
+            foreach (Collider2D col in colliders)
+            {
+                if (col.gameObject.TryGetComponent(out Block block))
                 {
-                    int pickUpIndex = Random.Range(0, _possiblePickUps.Length);
-                    Instantiate(_possiblePickUps[pickUpIndex], position, Quaternion.identity);
+                    block.ForceDestroy();
                 }
             }
         }

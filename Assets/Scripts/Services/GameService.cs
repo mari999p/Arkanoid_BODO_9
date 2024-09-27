@@ -24,6 +24,7 @@ namespace Arkanoid.Services
         #region Events
 
         public event Action<int> OnScoreChanged;
+        public event Action<int> OnLiveChanged; 
 
         #endregion
 
@@ -58,13 +59,25 @@ namespace Arkanoid.Services
 
         #region Public methods
 
-        public void AddLife(int value)
+        public void ChangeLife(int value)
         {
             _lives += value;
-            if (_lives > _maxLives)
+            _lives = Mathf.Clamp(_lives, 0, _maxLives);
+            OnLiveChanged?.Invoke(_lives);
+            CheckGameEnd();
+        }
+
+        private void CheckGameEnd()
+        {
+            if (_lives > 0)
             {
-                _lives = _maxLives;
+               
+                OnLiveChanged?.Invoke(_lives);
+                return;
             }
+
+            Debug.LogError("GAME OVER!");
+            GameOverScreen.Instance.ShowGameOver();
         }
 
         public void AddScore(int value)
@@ -73,19 +86,9 @@ namespace Arkanoid.Services
             OnScoreChanged?.Invoke(_score);
         }
 
-        public void RemoveLife()
+        public void ResetBall()
         {
-            if (_lives > 0)
-            {
-                _lives--;
-                GameOverScreen.Instance.RemoveHeart();
-
-                LevelService.Instance.Ball.ResetBall();
-                return;
-            }
-
-            Debug.LogError("GAME OVER!");
-            GameOverScreen.Instance.ShowGameOver();
+            LevelService.Instance.Ball.ResetBall();
         }
 
         #endregion
