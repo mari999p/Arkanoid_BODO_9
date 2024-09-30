@@ -7,8 +7,9 @@ namespace Arkanoid.Services
 {
     public class LevelService : SingletonMonoBehaviour<LevelService>
     {
-
         #region Variables
+
+        private readonly List<Ball> _balls = new();
 
         private readonly List<Block> _blocks = new();
 
@@ -23,6 +24,7 @@ namespace Arkanoid.Services
         #region Properties
 
         public Ball Ball { get; private set; }
+        public IReadOnlyList<Block> Blocks => _blocks;
 
         #endregion
 
@@ -50,16 +52,31 @@ namespace Arkanoid.Services
 
         #endregion
 
+        #region Public methods
+
+        public List<Ball> GetAllBalls()
+        {
+            return new List<Ball>(_balls);
+        }
+
+        #endregion
+
         #region Private methods
 
         private void BallCreatedCallback(Ball ball)
         {
             Ball = ball;
+            _balls.Add(ball);
         }
 
         private void BallDestroyedCallback(Ball ball)
         {
             Ball = null;
+            _balls.Remove(ball);
+            if (_balls.Count == 0)
+            {
+                GameService.Instance.CheckGameEnd();
+            }
         }
 
         private void BlockCreatedCallback(Block block)

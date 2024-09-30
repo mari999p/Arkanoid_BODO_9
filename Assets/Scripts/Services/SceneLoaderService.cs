@@ -38,6 +38,15 @@ namespace Arkanoid.Services
             LoadCurrentScene();
         }
 
+        public void LoadLevel(int index)
+        {
+            if (index >= 0 && index < _levelSceneNames.Length)
+            {
+                _currentSceneIndex = index;
+                LoadCurrentScene();
+            }
+        }
+
         public void LoadNextLevel()
         {
             _currentSceneIndex++;

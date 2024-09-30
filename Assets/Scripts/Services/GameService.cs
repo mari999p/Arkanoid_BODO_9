@@ -23,8 +23,9 @@ namespace Arkanoid.Services
 
         #region Events
 
+        public event Action<int> OnLiveChanged;
+
         public event Action<int> OnScoreChanged;
-        public event Action<int> OnLiveChanged; 
 
         #endregion
 
@@ -59,6 +60,12 @@ namespace Arkanoid.Services
 
         #region Public methods
 
+        public void AddScore(int value)
+        {
+            _score += value;
+            OnScoreChanged?.Invoke(_score);
+        }
+
         public void ChangeLife(int value)
         {
             _lives += value;
@@ -67,23 +74,13 @@ namespace Arkanoid.Services
             CheckGameEnd();
         }
 
-        private void CheckGameEnd()
+        public void CheckGameEnd()
         {
-            if (_lives > 0)
+            if (_lives <= 0)
             {
-               
-                OnLiveChanged?.Invoke(_lives);
-                return;
+                Debug.LogError("GAME OVER!");
+                GameOverScreen.Instance.ShowGameOver();
             }
-
-            Debug.LogError("GAME OVER!");
-            GameOverScreen.Instance.ShowGameOver();
-        }
-
-        public void AddScore(int value)
-        {
-            _score += value;
-            OnScoreChanged?.Invoke(_score);
         }
 
         public void ResetBall()
@@ -97,12 +94,13 @@ namespace Arkanoid.Services
 
         private void AllBlocksDestroyedCallback()
         {
-            if (SceneLoaderService.Instance.HasNextLevel())
+            if (!SceneLoaderService.Instance.HasNextLevel())
             {
-                SceneLoaderService.Instance.LoadNextLevel();
+                GameWinScreen.Instance.ShowVictory();
             }
             else
             {
+                SceneLoaderService.Instance.LoadNextLevel();
                 Debug.LogError("GAME WIN!");
             }
         }

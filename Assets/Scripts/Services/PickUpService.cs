@@ -21,6 +21,8 @@ namespace Arkanoid.Services
 
         #endregion
 
+        #region Unity lifecycle
+
         private void OnValidate()
         {
             foreach (PickUpAndProbability probability in _pickUpsVariants)
@@ -28,6 +30,8 @@ namespace Arkanoid.Services
                 probability.Validate();
             }
         }
+
+        #endregion
 
         #region Public methods
 
@@ -77,26 +81,31 @@ namespace Arkanoid.Services
         #endregion
 
         #region Local data
+
         [Serializable]
         private class PickUpAndProbability
         {
             #region Variables
-            [HideInInspector]
-            [SerializeField] private string _name; 
-             public PickUp pickUpPrefab;
+
+            public PickUp pickUpPrefab;
             [FormerlySerializedAs("Probability")]
             [Header("relative probability, not actual percentage")]
             [Range(0f, 100f)]
-             public float probability;
+            public float probability;
+            [HideInInspector]
+            [SerializeField] private string _name;
 
             #endregion
+
+            #region Public methods
 
             public void Validate()
             {
                 _name = pickUpPrefab != null ? pickUpPrefab.name : string.Empty;
             }
+
+            #endregion
         }
-        
 
         #endregion
     }
