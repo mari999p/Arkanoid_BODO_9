@@ -5,9 +5,7 @@ namespace Arkanoid.Game
 {
     public class Platform : MonoBehaviour
     {
-        
         #region Unity lifecycle
-        
 
         private void Update()
         {

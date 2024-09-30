@@ -81,9 +81,9 @@ namespace Arkanoid.Game
 
         #region Public methods
 
-        public void ForceDestroy()
+        public int GetScore()
         {
-            DestroyBlock();
+            return _score;
         }
 
         #endregion
@@ -106,13 +106,14 @@ namespace Arkanoid.Game
             }
 
             AudioService.Instance.PlaySfx(_explosionAudioClip);
-            
+
             if (_explosionVfxPrefab != null)
             {
                 Instantiate(_explosionVfxPrefab, transform.position, Quaternion.identity);
             }
-            
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _explosiveRadius, _explosiveLayerMask);
+
+            Collider2D[] colliders =
+                Physics2D.OverlapCircleAll(transform.position, _explosiveRadius, _explosiveLayerMask);
             foreach (Collider2D col in colliders)
             {
                 if (col.gameObject.TryGetComponent(out Block block))
@@ -120,6 +121,11 @@ namespace Arkanoid.Game
                     block.ForceDestroy();
                 }
             }
+        }
+
+        private void ForceDestroy()
+        {
+            DestroyBlock();
         }
 
         private void UpdateBlockSprite()
