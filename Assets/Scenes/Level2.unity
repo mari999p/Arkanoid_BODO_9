@@ -506,8 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreLabel: {fileID: 506012729}
   _gameOverPanel: {fileID: 1515462091}
-  _ball: {fileID: 1947594779}
-  _platform: {fileID: 294524067}
+  _explosionAudioClip: {fileID: 0}
 --- !u!1 &232648530
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,11 +761,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &294524067 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6126161415700150984, guid: babe59d65a2795c40a2d38ec9b87d5b4, type: 3}
-  m_PrefabInstance: {fileID: 1614835826378784488}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &457777968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1776,6 +1770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreLabel: {fileID: 1643853537}
   _victoryPanel: {fileID: 863956315}
+  _explosionAudioClip: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
 --- !u!1 &1137622533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,11 +2776,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8214364846393928258, guid: f90f54063a007ce4eb504c943bb257a2, type: 3}
   m_PrefabInstance: {fileID: 1847573638}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1947594779 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3766216867641599244, guid: afcb4e4ccce89a042848cf890a2c8785, type: 3}
-  m_PrefabInstance: {fileID: 3587052979465441312}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1955799558
 GameObject:
   m_ObjectHideFlags: 0
@@ -3527,19 +3517,7 @@ PrefabInstance:
     - target: {fileID: 7474439457140853680, guid: afcb4e4ccce89a042848cf890a2c8785, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3e8b06ca790a1f541949676256a42c2a, type: 3}
-    - target: {fileID: 7474439457140853680, guid: afcb4e4ccce89a042848cf890a2c8785, type: 3}
-      propertyPath: m_Color.b
-      value: 0.2877597
-      objectReference: {fileID: 0}
-    - target: {fileID: 7474439457140853680, guid: afcb4e4ccce89a042848cf890a2c8785, type: 3}
-      propertyPath: m_Color.g
-      value: 0.7433963
-      objectReference: {fileID: 0}
-    - target: {fileID: 7474439457140853680, guid: afcb4e4ccce89a042848cf890a2c8785, type: 3}
-      propertyPath: m_Color.r
-      value: 0.22862937
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 5c896b0ace30a374898c1978764e656b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
