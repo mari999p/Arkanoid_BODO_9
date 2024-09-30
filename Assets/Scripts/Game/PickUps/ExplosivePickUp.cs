@@ -3,12 +3,13 @@ using UnityEngine;
 
 namespace Arkanoid.Game.PickUps
 {
-    public class ChangeLifePickUp : PickUp
+    public class ExplosivePickUp : PickUp
     {
         #region Variables
 
-        [SerializeField] private int _lifeChange;
+        [SerializeField] private float _explosionRadius = 5f;
         [SerializeField] private int _points;
+        [SerializeField] private AudioClip _explosionAudioClip;
 
         #endregion
 
@@ -18,9 +19,14 @@ namespace Arkanoid.Game.PickUps
         {
             base.PerformActions();
             GameService.Instance.AddScore(_points);
-            GameService.Instance.ChangeLife(_lifeChange);
+            AudioService.Instance.PlaySfx(_explosionAudioClip);
+            if (LevelService.Instance.Ball != null)
+            {
+                LevelService.Instance.Ball.MakeExplosive(_explosionRadius);
+            }
         }
 
         #endregion
     }
 }
+
