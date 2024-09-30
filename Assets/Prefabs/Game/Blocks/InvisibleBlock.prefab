@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -4904951829007417757}
   m_Layer: 8
   m_Name: InvisibleBlock
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,6 +87,13 @@ MonoBehaviour:
   _hitPoints: 3
   _score: 1
   _isInvisible: 1
+  _isExplosive: 0
+  _explosiveRadius: 1
+  _explosiveLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _explosionVfxPrefab: {fileID: 0}
+  _explosionAudioClip: {fileID: 0}
 --- !u!1 &4442873299656924847
 GameObject:
   m_ObjectHideFlags: 0

@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sizeChange: 10
+  _points: 10
 --- !u!50 &2639813727193568204
 Rigidbody2D:
   serializedVersion: 4

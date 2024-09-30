@@ -47,6 +47,9 @@ MonoBehaviour:
   _levelSceneNames:
   - Level1
   - Level2
+  - Level3
+  - Level4
+  - Level5
 --- !u!1 &2546165071696306394
 GameObject:
   m_ObjectHideFlags: 0

@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2365724597182288878}
   m_Layer: 8
   m_Name: 'TriangularWoodBlock '
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,6 +136,13 @@ MonoBehaviour:
   _hitPoints: 3
   _score: 70
   _isInvisible: 0
+  _isExplosive: 0
+  _explosiveRadius: 1
+  _explosiveLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _explosionVfxPrefab: {fileID: 0}
+  _explosionAudioClip: {fileID: 0}
 --- !u!60 &2365724597182288878
 PolygonCollider2D:
   m_ObjectHideFlags: 0
