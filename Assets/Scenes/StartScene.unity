@@ -2231,22 +2231,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4508969073882044357, guid: 1d4a1d677adcf8343ae3142406188931, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508969073882044357, guid: 1d4a1d677adcf8343ae3142406188931, type: 3}
-      propertyPath: _exitButton
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508969073882044357, guid: 1d4a1d677adcf8343ae3142406188931, type: 3}
-      propertyPath: _continueButton
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508969073882044357, guid: 1d4a1d677adcf8343ae3142406188931, type: 3}
-      propertyPath: _pauseMenuPanel
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6356677102817679001, guid: 1d4a1d677adcf8343ae3142406188931, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

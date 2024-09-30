@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6493029748308688971}
   m_Layer: 8
   m_Name: 'SquareGlassBlock '
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,6 +52,13 @@ MonoBehaviour:
   _hitPoints: 3
   _score: 100
   _isInvisible: 0
+  _isExplosive: 0
+  _explosiveRadius: 1
+  _explosiveLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _explosionVfxPrefab: {fileID: 0}
+  _explosionAudioClip: {fileID: 0}
 --- !u!61 &6493029748308688971
 BoxCollider2D:
   m_ObjectHideFlags: 0
