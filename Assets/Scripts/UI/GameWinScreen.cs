@@ -4,14 +4,15 @@ using UnityEngine;
 
 namespace Arkanoid.UI
 {
-    public class VictoryScreen : MonoBehaviour
+    public class GameWinScreen : MonoBehaviour
     {
         #region Variables
 
-        public static VictoryScreen Instance;
+        public static GameWinScreen Instance;
 
         [SerializeField] private TMP_Text _scoreLabel;
         [SerializeField] private GameObject _victoryPanel;
+        [SerializeField] private AudioClip _explosionAudioClip;
 
         #endregion
 
@@ -31,9 +32,11 @@ namespace Arkanoid.UI
             if (_victoryPanel)
             {
                 _victoryPanel.SetActive(true);
-                TMP_Text victoryText = _victoryPanel.GetComponentInChildren<TMP_Text>();
-                victoryText.text = $"Victory!\nScore: {GameService.Instance.Score}";
+                TMP_Text gameWinText = _victoryPanel.GetComponentInChildren<TMP_Text>();
+                gameWinText.text = $"Game Win!\nScore: {GameService.Instance.Score}";
                 Time.timeScale = 0;
+                AudioService.Instance.PlaySfx(_explosionAudioClip);
+                PauseService.Instance.TogglePause();
             }
         }
 

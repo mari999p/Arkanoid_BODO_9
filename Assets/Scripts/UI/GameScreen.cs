@@ -20,6 +20,7 @@ namespace Arkanoid.UI
         {
             GameService.Instance.OnScoreChanged += ScoreChangedCallback;
             GameService.Instance.OnLiveChanged += UpdateHearts;
+            UpdateHearts(GameService.Instance.Lives); 
             UpdateScore();
         }
 

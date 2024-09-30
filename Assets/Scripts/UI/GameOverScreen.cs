@@ -12,8 +12,7 @@ namespace Arkanoid.UI
 
         [SerializeField] private TMP_Text _scoreLabel;
         [SerializeField] private GameObject _gameOverPanel;
-        [SerializeField] private GameObject _ball;
-        [SerializeField] private GameObject _platform;
+        [SerializeField] private AudioClip _explosionAudioClip;
 
         #endregion
 
@@ -40,9 +39,8 @@ namespace Arkanoid.UI
                 _gameOverPanel.SetActive(true);
                 TMP_Text gameOverText = _gameOverPanel.GetComponentInChildren<TMP_Text>();
                 gameOverText.text = $"Game Over!\n Score: {GameService.Instance.Score}";
-                Time.timeScale = 0;
-                _ball.SetActive(false);
-                _platform.SetActive(false);
+                AudioService.Instance.PlaySfx(_explosionAudioClip);
+                PauseService.Instance.TogglePause();
             }
         }
 
