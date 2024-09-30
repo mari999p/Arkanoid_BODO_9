@@ -1781,6 +1781,10 @@ MonoBehaviour:
   _levelButtons:
   - {fileID: 591997598}
   - {fileID: 139118174}
+  - {fileID: 159193687}
+  - {fileID: 315509453}
+  - {fileID: 1391202907}
+  _highlightColor: {r: 0.27058825, g: 0.2784314, b: 0.6666667, a: 0.62352943}
 --- !u!1 &1821308701
 GameObject:
   m_ObjectHideFlags: 0
