@@ -16,8 +16,10 @@ namespace Arkanoid.Game
 
         [Header("Audio")]
         [SerializeField] private AudioClip _hitAudioClip;
-        [SerializeField] private Object _explosionEffectPrefab;
         [SerializeField] private AudioClip _explosionAudioClip;
+
+        [Header("Effects")]
+        [SerializeField] private Object _explosionEffectPrefab;
 
         private float _explosionRadius;
         private bool _isExplosive;

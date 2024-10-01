@@ -10,6 +10,7 @@ namespace Arkanoid.Game.PickUps
         [SerializeField] private float _sizeChange;
         [SerializeField] private int _points;
         [SerializeField] private AudioClip _explosionAudioClip;
+
         #endregion
 
         #region Protected methods

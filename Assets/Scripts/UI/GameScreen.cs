@@ -10,7 +10,6 @@ namespace Arkanoid.UI
 
         [SerializeField] private TMP_Text _scoreLabel;
         [SerializeField] private GameObject[] _hearts;
-        
 
         #endregion
 
@@ -20,16 +19,8 @@ namespace Arkanoid.UI
         {
             GameService.Instance.OnScoreChanged += ScoreChangedCallback;
             GameService.Instance.OnLiveChanged += UpdateHearts;
-            UpdateHearts(GameService.Instance.Lives); 
+            UpdateHearts(GameService.Instance.Lives);
             UpdateScore();
-        }
-
-        private void UpdateHearts(int lives)
-        {
-            for (int i = 0; i < _hearts.Length; i++)
-            {
-                _hearts[i].SetActive(i < lives);
-            }
         }
 
         private void OnDestroy()
@@ -47,11 +38,18 @@ namespace Arkanoid.UI
             UpdateScore();
         }
 
+        private void UpdateHearts(int lives)
+        {
+            for (int i = 0; i < _hearts.Length; i++)
+            {
+                _hearts[i].SetActive(i < lives);
+            }
+        }
+
         private void UpdateScore()
         {
             _scoreLabel.text = $"Score: {GameService.Instance.Score}";
         }
-       
 
         #endregion
     }

@@ -18,10 +18,13 @@ namespace Arkanoid.Game
         [SerializeField] private int _score = 1;
         [SerializeField] private bool _isInvisible;
 
+        [Header("Block Settings")]
         [SerializeField] private bool _isExplosive;
         [SerializeField] private float _explosiveRadius = 1f;
         [SerializeField] private LayerMask _explosiveLayerMask;
         [SerializeField] private GameObject _explosionVfxPrefab;
+
+        [Header("Audio")]
         [SerializeField] private AudioClip _explosionAudioClip;
 
         #endregion

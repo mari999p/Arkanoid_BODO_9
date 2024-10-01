@@ -87,7 +87,6 @@ namespace Arkanoid.UI
         private void LevelButtonClicked(Button button)
         {
             _selectedLevel = System.Array.IndexOf(_levelButtons, button);
-            Debug.Log("Selected level: " + _selectedLevel);
             foreach (Button btn in _levelButtons)
             {
                 btn.image.color = _defaultColor;

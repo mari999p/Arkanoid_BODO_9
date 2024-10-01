@@ -18,7 +18,7 @@ namespace Arkanoid.Game.PickUps
         protected override void PerformActions()
         {
             base.PerformActions();
-                        
+
             AudioService.Instance.PlaySfx(_explosionAudioClip);
             GameService.Instance.AddScore(_points);
 

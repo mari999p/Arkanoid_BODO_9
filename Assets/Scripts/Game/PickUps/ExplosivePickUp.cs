@@ -29,4 +29,3 @@ namespace Arkanoid.Game.PickUps
         #endregion
     }
 }
-
