@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sizeChange: 10
   _points: 10
+  _explosionAudioClip: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
 --- !u!58 &3982794683180778394
 CircleCollider2D:
   m_ObjectHideFlags: 0

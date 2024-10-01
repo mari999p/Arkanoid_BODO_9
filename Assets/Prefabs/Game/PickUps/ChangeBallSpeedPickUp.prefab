@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0f5f9a86a8a1bec44ae5220f0bfafcc6, type: 3}
-  m_Color: {r: 0.32216665, g: 0.17777851, b: 0.4641509, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedChange: 1
   _points: 10
+  _explosionAudioClip: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
 --- !u!50 &2639813727193568204
 Rigidbody2D:
   serializedVersion: 4

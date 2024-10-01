@@ -283,25 +283,25 @@ MonoBehaviour:
   _commonProbability: 50
   _pickUpsVariants:
   - pickUpPrefab: {fileID: 6572373674593341395, guid: caeafcee5c89740469c77c6a167377e9, type: 3}
-    probability: 50
+    probability: 40
     _name: CatchBallPickUp
   - pickUpPrefab: {fileID: 7269836523549016166, guid: 7cffb738f0908a74f99ee97540c14815, type: 3}
-    probability: 50
+    probability: 40
     _name: ChangeBallSizePickUp
   - pickUpPrefab: {fileID: 7101919053168907666, guid: 2b8dec066440d2443bfa04a38c7ae810, type: 3}
-    probability: 50
+    probability: 40
     _name: ChangeBallSpeedPickUp
   - pickUpPrefab: {fileID: 2029836646471952897, guid: b94db6ec3e86bec459ce45708d7f3602, type: 3}
-    probability: 50
+    probability: 40
     _name: ChangePlatformSizePickUp
   - pickUpPrefab: {fileID: -8978662338578433373, guid: 0d4365a4e47cea04aa8d19d28a414a63, type: 3}
-    probability: 50
+    probability: 40
     _name: ChangeScorePickUp
   - pickUpPrefab: {fileID: 6719772799437768745, guid: 0d8ff64d3fcea9845b97e1e6ceb2253c, type: 3}
-    probability: 10
+    probability: 40
     _name: ExplosivePickUp
   - pickUpPrefab: {fileID: 2013749479425461760, guid: 31b4bdfc90e44244d9a7a5e615205f95, type: 3}
-    probability: 70
+    probability: 50
     _name: HandleLife
 --- !u!1 &7539090910252172802
 GameObject:
