@@ -9,6 +9,7 @@ namespace Arkanoid.Game.PickUps
         #region Variables
 
         [SerializeField] private int _cloneBall = 2;
+        [SerializeField] private AudioClip _explosionAudioClip;
 
         #endregion
 
@@ -18,6 +19,7 @@ namespace Arkanoid.Game.PickUps
         {
             base.PerformActions();
             CloneBalls(_cloneBall);
+            AudioService.Instance.PlaySfx(_explosionAudioClip);
         }
 
         private void CloneBalls(int count)
@@ -27,7 +29,8 @@ namespace Arkanoid.Game.PickUps
             {
                 for (int i = 0; i < count; i++)
                 {
-                    Instantiate(ball.gameObject, ball.transform.position, Quaternion.identity);
+                    Ball newBall = ball.Clone();
+                    newBall.GetRandomStartDirection();
                 }
             }
 

@@ -12,7 +12,9 @@ namespace Arkanoid.UI
         [SerializeField] private Button _startButton;
         [SerializeField] private Button[] _levelButtons;
         [SerializeField] private Color _highlightColor = Color.yellow;
+        [SerializeField] private AudioClip _explosionAudioClip;
         private Color _defaultColor;
+        private int _selectedLevel = -1;
 
         #endregion
 
@@ -25,7 +27,8 @@ namespace Arkanoid.UI
             AddEventTrigger(_startButton);
             foreach (Button button in _levelButtons)
             {
-                button.onClick.AddListener(() => StartGameWithLevel(button));
+                button.onClick.AddListener(() => LevelButtonClicked(button));
+
                 AddEventTrigger(button);
             }
         }
@@ -60,24 +63,39 @@ namespace Arkanoid.UI
         private void OnPointerEnter(Button button)
         {
             button.image.color = _highlightColor;
+            AudioService.Instance.PlaySfx(_explosionAudioClip);
         }
 
         private void OnPointerExit(Button button)
         {
+            if (_selectedLevel == System.Array.IndexOf(_levelButtons, button))
+            {
+                return;
+            }
+
             button.image.color = _defaultColor;
         }
 
         private void StartButtonClickedCallback()
         {
-            SceneLoaderService.Instance.LoadFirstLevel();
+            if (_selectedLevel >= 0)
+            {
+                SceneLoaderService.Instance.LoadLevel(_selectedLevel);
+            }
         }
 
-        private void StartGameWithLevel(Button button)
+        private void LevelButtonClicked(Button button)
         {
-            int levelIndex = System.Array.IndexOf(_levelButtons, button);
-            SceneLoaderService.Instance.LoadLevel(levelIndex);
-        }
+            _selectedLevel = System.Array.IndexOf(_levelButtons, button);
+            Debug.Log("Selected level: " + _selectedLevel);
+            foreach (Button btn in _levelButtons)
+            {
+                btn.image.color = _defaultColor;
+            }
 
-        #endregion
+            button.image.color = _highlightColor;
+
+            #endregion
+        }
     }
 }

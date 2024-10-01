@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Arkanoid.Services;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -104,7 +102,22 @@ namespace Arkanoid.Game
 
         public Ball Clone()
         {
-            return Instantiate(this, transform.position, Quaternion.identity);
+            Ball clone = Instantiate(this, transform.position, Quaternion.identity);
+            clone._isStarted = _isStarted;
+            clone._rb.velocity = _rb.velocity;
+            return clone;
+        }
+
+        public Vector2 GetRandomStartDirection()
+        {
+            float minAngleDeg = -75f;
+            float maxAngleDeg = 75f;
+            float minAngleRad = minAngleDeg * Mathf.Deg2Rad;
+            float maxAngleRad = maxAngleDeg * Mathf.Deg2Rad;
+            float randomAngle = Random.Range(minAngleRad, maxAngleRad);
+            Vector2 direction = new Vector2(Mathf.Sin(randomAngle), Mathf.Cos(randomAngle)).normalized;
+
+            return direction;
         }
 
         public void MakeExplosive(float explosionRadius)
@@ -125,30 +138,18 @@ namespace Arkanoid.Game
 
         private void Explode()
         {
-            List<Block> blocksInRange = LevelService.Instance.Blocks
-                .Where(block => Vector3.Distance(transform.position, block.transform.position) <= _explosionRadius)
-                .ToList();
-
-            foreach (Block block in blocksInRange)
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _explosionRadius);
+            foreach (Collider2D collider1 in colliders)
             {
-                Instantiate(_explosionEffectPrefab, block.transform.position, Quaternion.identity);
-                Destroy(block.gameObject);
-                GameService.Instance.AddScore(block.GetScore());
-                AudioService.Instance.PlaySfx(_explosionAudioClip);
+                Block block = collider1.GetComponent<Block>();
+                if (block != null)
+                {
+                    Instantiate(_explosionEffectPrefab, block.transform.position, Quaternion.identity);
+                    Destroy(block.gameObject);
+                    GameService.Instance.AddScore(block.GetScore());
+                    AudioService.Instance.PlaySfx(_explosionAudioClip);
+                }
             }
-        }
-
-        private Vector2 GetRandomStartDirection()
-        {
-            float minAngleDeg = -75f;
-            float maxAngleDeg = 75f;  
-            float minAngleRad = minAngleDeg * Mathf.Deg2Rad;
-            float maxAngleRad = maxAngleDeg * Mathf.Deg2Rad;
-            float randomAngle = Random.Range(minAngleRad, maxAngleRad);
-            Vector2 direction = new Vector2(Mathf.Sin(randomAngle), Mathf.Cos(randomAngle)).normalized;
-
-            return direction;
-
         }
 
         private void MoveWithPlatform()

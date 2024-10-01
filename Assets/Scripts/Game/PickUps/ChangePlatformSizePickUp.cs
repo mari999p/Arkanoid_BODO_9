@@ -9,6 +9,7 @@ namespace Arkanoid.Game.PickUps
 
         [SerializeField] private float _sizeChange;
         [SerializeField] private int _points;
+        [SerializeField] private AudioClip _explosionAudioClip;
 
         #endregion
 
@@ -17,6 +18,8 @@ namespace Arkanoid.Game.PickUps
         protected override void PerformActions()
         {
             base.PerformActions();
+                        
+            AudioService.Instance.PlaySfx(_explosionAudioClip);
             GameService.Instance.AddScore(_points);
 
             Platform platform = FindObjectOfType<Platform>();
