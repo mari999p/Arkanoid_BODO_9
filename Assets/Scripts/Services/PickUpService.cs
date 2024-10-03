@@ -87,13 +87,13 @@ namespace Arkanoid.Services
         {
             #region Variables
 
+            [HideInInspector]
+            public string Name;
             public PickUp pickUpPrefab;
             [FormerlySerializedAs("Probability")]
             [Header("relative probability, not actual percentage")]
             [Range(0f, 100f)]
             public float probability;
-            [HideInInspector]
-            [SerializeField] private string _name;
 
             #endregion
 
@@ -101,7 +101,7 @@ namespace Arkanoid.Services
 
             public void Validate()
             {
-                _name = pickUpPrefab != null ? pickUpPrefab.name : string.Empty;
+                Name = pickUpPrefab != null ? pickUpPrefab.name : string.Empty;
             }
 
             #endregion

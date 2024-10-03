@@ -7,9 +7,8 @@ namespace Arkanoid.Game.PickUps
     {
         #region Variables
 
+        [Header(nameof(ChangeLifePickUp))]
         [SerializeField] private int _lifeChange;
-        [SerializeField] private int _points;
-        [SerializeField] private AudioClip _explosionAudioClip;
 
         #endregion
 
@@ -18,9 +17,8 @@ namespace Arkanoid.Game.PickUps
         protected override void PerformActions()
         {
             base.PerformActions();
-            GameService.Instance.AddScore(_points);
+
             GameService.Instance.ChangeLife(_lifeChange);
-            AudioService.Instance.PlaySfx(_explosionAudioClip);
         }
 
         #endregion

@@ -7,9 +7,8 @@ namespace Arkanoid.Game.PickUps
     {
         #region Variables
 
+        [Header(nameof(ChangeBallSizePickUp))]
         [SerializeField] private float _sizeChange;
-        [SerializeField] private int _points;
-        [SerializeField] private AudioClip _explosionAudioClip;
 
         #endregion
 
@@ -18,8 +17,6 @@ namespace Arkanoid.Game.PickUps
         protected override void PerformActions()
         {
             base.PerformActions();
-            GameService.Instance.AddScore(_points);
-            AudioService.Instance.PlaySfx(_explosionAudioClip);
 
             Ball ball = LevelService.Instance.Ball;
             if (ball != null)

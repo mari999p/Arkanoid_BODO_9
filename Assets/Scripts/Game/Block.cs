@@ -84,9 +84,9 @@ namespace Arkanoid.Game
 
         #region Public methods
 
-        public int GetScore()
+        public void ForceDestroy()
         {
-            return _score;
+            DestroyBlock();
         }
 
         #endregion
@@ -124,11 +124,6 @@ namespace Arkanoid.Game
                     block.ForceDestroy();
                 }
             }
-        }
-
-        private void ForceDestroy()
-        {
-            DestroyBlock();
         }
 
         private void UpdateBlockSprite()

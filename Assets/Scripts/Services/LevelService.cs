@@ -25,6 +25,8 @@ namespace Arkanoid.Services
 
         public Ball Ball { get; private set; }
         public IReadOnlyList<Block> Blocks => _blocks;
+        public List<Ball> Balls => _balls;
+
 
         #endregion
 
@@ -54,10 +56,7 @@ namespace Arkanoid.Services
 
         #region Public methods
 
-        public List<Ball> GetAllBalls()
-        {
-            return new List<Ball>(_balls);
-        }
+     
 
         #endregion
 

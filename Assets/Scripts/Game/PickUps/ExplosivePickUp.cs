@@ -7,9 +7,10 @@ namespace Arkanoid.Game.PickUps
     {
         #region Variables
 
+        [Header(nameof(ExplosivePickUp))]
         [SerializeField] private float _explosionRadius = 5f;
-        [SerializeField] private int _points;
-        [SerializeField] private AudioClip _explosionAudioClip;
+        [SerializeField] private Sprite _ballSprite;
+        [SerializeField] private Gradient _ballCGradient;
 
         #endregion
 
@@ -18,11 +19,9 @@ namespace Arkanoid.Game.PickUps
         protected override void PerformActions()
         {
             base.PerformActions();
-            GameService.Instance.AddScore(_points);
-            AudioService.Instance.PlaySfx(_explosionAudioClip);
-            if (LevelService.Instance.Ball != null)
+            foreach (Ball ball in LevelService.Instance.Balls)
             {
-                LevelService.Instance.Ball.MakeExplosive(_explosionRadius);
+                ball.MakeExplosive(_explosionRadius, _ballSprite, _ballCGradient);
             }
         }
 

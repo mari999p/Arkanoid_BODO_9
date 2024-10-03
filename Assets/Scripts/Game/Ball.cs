@@ -10,7 +10,12 @@ namespace Arkanoid.Game
     {
         #region Variables
 
+        [Header("Components")]
         [SerializeField] private Rigidbody2D _rb;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private TrailRenderer _trailRenderer;
+        
+        [Header("Settings")]
         [SerializeField] private float _speed = 10;
         [SerializeField] private float _yOffsetFromPlatform = 1;
 
@@ -122,10 +127,12 @@ namespace Arkanoid.Game
             return direction;
         }
 
-        public void MakeExplosive(float explosionRadius)
+        public void MakeExplosive(float explosionRadius, Sprite sprite, Gradient trailGradient)
         {
             _isExplosive = true;
             _explosionRadius = explosionRadius;
+            _spriteRenderer.sprite = sprite;
+            _trailRenderer.colorGradient = trailGradient;
         }
 
         public void ResetBall()
@@ -147,9 +154,8 @@ namespace Arkanoid.Game
                 if (block != null)
                 {
                     Instantiate(_explosionEffectPrefab, block.transform.position, Quaternion.identity);
-                    Destroy(block.gameObject);
-                    GameService.Instance.AddScore(block.GetScore());
                     AudioService.Instance.PlaySfx(_explosionAudioClip);
+                    block.ForceDestroy();
                 }
             }
         }
