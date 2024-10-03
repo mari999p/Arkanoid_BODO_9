@@ -11,7 +11,6 @@ namespace Arkanoid.UI
         public static GameWinScreen Instance;
 
         [SerializeField] private TMP_Text _scoreLabel;
-        [SerializeField] private TMP_Text _gameWinLabel;
 
         [SerializeField] private GameObject _victoryPanel;
         [SerializeField] private AudioClip _explosionAudioClip;
@@ -34,7 +33,7 @@ namespace Arkanoid.UI
             if (_victoryPanel)
             {
                 _victoryPanel.SetActive(true);
-                _gameWinLabel.text = $"Game Win!\nScore: {GameService.Instance.Score}";
+                _scoreLabel.text = $"Game Win!\nScore: {GameService.Instance.Score}";
                 Time.timeScale = 0;
                 AudioService.Instance.PlaySfx(_explosionAudioClip);
                 PauseService.Instance.TogglePause();
