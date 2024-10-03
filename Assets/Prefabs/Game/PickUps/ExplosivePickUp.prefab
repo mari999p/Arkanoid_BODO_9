@@ -47,11 +47,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9b84b0467a4a0bb1daeba515f425e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionRadius: 5
-  _points: 10
   _explosionAudioClip: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
-  _trailRenderer: {fileID: 0}
-  _explosionsprite: {fileID: 21300000, guid: b0b9a0e36d8c43f43abfc70e08a4d415, type: 3}
+  _points: 10
+  _explosionRadius: 5
+  _ballSprite: {fileID: 21300000, guid: 61d833bf984a6164cbb3ee11701a3882, type: 3}
+  _ballCGradient:
+    serializedVersion: 2
+    key0: {r: 0.2709505, g: 0.47182995, b: 0.6679245, a: 1}
+    key1: {r: 0, g: 0.046072003, b: 0.4037736, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 13493
+    ctime1: 33539
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
 --- !u!58 &4426435862538060961
 CircleCollider2D:
   m_ObjectHideFlags: 0

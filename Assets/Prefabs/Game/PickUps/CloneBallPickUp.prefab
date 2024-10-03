@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b8df8d11f548d79574c9726a3b84e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cloneBall: 2
   _explosionAudioClip: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
+  _points: 10
+  _cloneBall: 2
 --- !u!50 &4003579454901044226
 Rigidbody2D:
   serializedVersion: 4
