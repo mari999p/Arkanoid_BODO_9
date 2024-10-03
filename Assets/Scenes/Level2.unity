@@ -505,6 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreLabel: {fileID: 506012729}
+  _gameOverLabel: {fileID: 92540659}
   _gameOverPanel: {fileID: 1515462091}
   _explosionAudioClip: {fileID: 8300000, guid: 79e6baad2fd414b82a6d49ce1568d2e5, type: 3}
 --- !u!1 &232648530
@@ -1930,6 +1931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreLabel: {fileID: 1643853537}
+  _gameWinLabel: {fileID: 1643853537}
   _victoryPanel: {fileID: 863956315}
   _explosionAudioClip: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
 --- !u!1 &1137622533
