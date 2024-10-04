@@ -56,6 +56,9 @@ MonoBehaviour:
   _hitAudioClip: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
   _explosionAudioClip: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
   _explosionEffectPrefab: {fileID: 5927938525918574479, guid: 607927dd658eb7441ab43371f16f0083, type: 3}
+  _directionMin: -30
+  _directionMax: 30
+  _segments: 10
 --- !u!58 &1132658195824871477
 CircleCollider2D:
   m_ObjectHideFlags: 0

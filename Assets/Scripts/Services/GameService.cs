@@ -100,7 +100,7 @@ namespace Arkanoid.Services
             }
             else
             {
-                SceneLoaderService.Instance.LoadNextLevel();
+                SceneLoaderService.Instance.LoadNextLevelWithDelay(2);
                 Debug.LogError("GAME WIN!");
             }
         }

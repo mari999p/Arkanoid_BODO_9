@@ -11,6 +11,7 @@ namespace Arkanoid.UI
         public static GameOverScreen Instance;
 
         [SerializeField] private TMP_Text _scoreLabel;
+        [SerializeField] private TMP_Text _gameOverLabel;
         [SerializeField] private GameObject _gameOverPanel;
         [SerializeField] private AudioClip _explosionAudioClip;
 
@@ -37,7 +38,7 @@ namespace Arkanoid.UI
             if (_gameOverPanel != null)
             {
                 _gameOverPanel.SetActive(true);
-                _scoreLabel.text = $"Game Over!\n Score: {GameService.Instance.Score}";
+                _gameOverLabel.text = $"Game Over!\n Score: {GameService.Instance.Score}";
                 AudioService.Instance.PlaySfx(_explosionAudioClip);
                 PauseService.Instance.TogglePause();
             }

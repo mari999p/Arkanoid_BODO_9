@@ -1,5 +1,6 @@
 using System;
 using Arkanoid.Services;
+using Arkanoid.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -25,6 +26,11 @@ namespace Arkanoid.Game
 
         [Header("Effects")]
         [SerializeField] private Object _explosionEffectPrefab;
+        
+        [Header("Direction")]
+        [SerializeField] private float _directionMin = -90;
+        [SerializeField] private float _directionMax = 90;
+        [SerializeField] private int _segments = 10;
 
         private float _explosionRadius;
         private bool _isExplosive;
@@ -88,7 +94,7 @@ namespace Arkanoid.Game
             if (!_isStarted)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(transform.position, transform.position + (Vector3)GetRandomStartDirection());
+                GizmosUtils.DrawArc2D(transform.position, Vector2.up, _directionMin, _directionMax, _speed, _segments);
             }
             else
             {
